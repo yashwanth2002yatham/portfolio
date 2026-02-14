@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yashwanth Reddy Yatham — Product Visionary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0d0d0d;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #fafafa;
+            --text-secondary: #999999;
+            --accent: #ff6b35;
+            --accent-light: #ff8c61;
+            --accent-glow: rgba(255, 107, 53, 0.4);
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor.expand {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        /* Grain Texture Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-mode: difference;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 20vw;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.05);
+            line-height: 0.9;
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 0 2rem;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 12vw, 10rem);
+            font-weight: 900;
+            line-height: 0.95;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .line span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(120%);
+            animation: slideUp 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+        }
+
+        .hero-title .line:nth-child(1) span { animation-delay: 0.2s; }
+        .hero-title .line:nth-child(2) span { animation-delay: 0.4s; }
+        .hero-title .line:nth-child(3) span { animation-delay: 0.6s; }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.8s forwards;
+        }
+
+        .hero-cta {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            background: var(--accent);
+            color: var(--bg-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--accent-light);
+            transition: all 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+            transform: translate(-50%, -50%);
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.2s forwards;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollLine {
+            0%, 100% { transform: translateY(0); opacity: 0; }
+            50% { transform: translateY(20px); opacity: 1; }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 12rem 4rem;
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .stat-item.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 8vw, 7rem);
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+        }
+
+        .stat-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+
+        /* Marquee Section */
+        .marquee-section {
+            padding: 6rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .marquee {
+            display: flex;
+            gap: 4rem;
+            animation: marquee 30s linear infinite;
+            will-change: transform;
+        }
+
+        .marquee-item {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            white-space: nowrap;
+            color: var(--text-primary);
+        }
+
+        .marquee-item:nth-child(odd) {
+            color: var(--accent);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Experience Section */
+        .experience-section {
+            padding: 12rem 4rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            margin-bottom: 6rem;
+            line-height: 1;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .section-title.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .experience-item {
+            margin-bottom: 8rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .experience-item.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .experience-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .experience-title-group h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .experience-company {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .experience-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .meta-detail {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .experience-body {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+        }
+
+        .experience-type {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .achievements {
+            list-style: none;
+        }
+
+        .achievements li {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .achievements li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .tools-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tool {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .tool:hover {
+            border-color: var(--accent);
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 12rem 4rem;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+
+        .skills-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 6rem;
+        }
+
+        .skill-category {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .skill-category.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            font-size: 1.1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-list li:hover {
+            color: var(--text-primary);
+            padding-left: 1rem;
+        }
+
+        /* Education Section */
+        .education-section {
+            padding: 12rem 4rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .education-grid {
+            display: grid;
+            gap: 6rem;
+        }
+
+        .education-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 4rem;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .education-item.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .education-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 107, 53, 0.3);
+            line-height: 1;
+        }
+
+        .education-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-school {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .education-details {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .education-coursework {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 16rem 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(4rem, 10vw, 9rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .contact-title.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.2s;
+        }
+
+        .contact-subtitle.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 3rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .contact-link.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-link:nth-child(1) { transition-delay: 0.4s; }
+        .contact-link:nth-child(2) { transition-delay: 0.5s; }
+        .contact-link:nth-child(3) { transition-delay: 0.6s; }
+
+        .contact-link:hover {
+            border-color: var(--accent);
+            background: rgba(255, 107, 53, 0.1);
+            transform: translateY(-4px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-social a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 2rem 2rem;
+            }
+
+            .nav-menu {
+                gap: 2rem;
+            }
+
+            .hero-title {
+                font-size: 6rem;
+            }
+
+            .stats-section,
+            .experience-section,
+            .skills-section,
+            .education-section {
+                padding: 8rem 2rem;
+            }
+
+            .experience-header,
+            .experience-body {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .experience-meta {
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .education-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .education-number {
+                font-size: 4rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            nav {
+                padding: 1.5rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .experience-title-group h3 {
+                font-size: 2rem;
+            }
+
+            .contact-title {
+                font-size: 3.5rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-text">YRY</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Yashwanth</div>
+        <ul class="nav-menu">
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-text" data-parallax>PRODUCT</div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">Associate Product Manager</div>
+            <h1 class="hero-title">
+                <div class="line"><span>Yashwanth</span></div>
+                <div class="line"><span>Reddy</span></div>
+                <div class="line"><span>Yatham</span></div>
+            </h1>
+            <p class="hero-subtitle">
+                Transforming data into decisive product strategies that drive measurable growth and operational excellence
+            </p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-primary">
+                    <span>Let's Connect</span>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item" data-observe>
+                <div class="stat-number" data-count="2">0</div>
+                <div class="stat-label">YEARS EXPERIENCE</div>
+                <div class="stat-description">Across SaaS, EdTech & E-commerce</div>
+            </div>
+            <div class="stat-item" data-observe>
+                <div class="stat-number" data-count="21.8">0</div>
+                <div class="stat-label">% CHURN REDUCED</div>
+                <div class="stat-description">Through data-driven insights</div>
+            </div>
+            <div class="stat-item" data-observe>
+                <div class="stat-number" data-count="46">0</div>
+                <div class="stat-label">% EFFICIENCY GAINED</div>
+                <div class="stat-description">Sales & development processes</div>
+            </div>
+            <div class="stat-item" data-observe>
+                <div class="stat-number" data-count="38">0</div>
+                <div class="stat-label">% DEV EFFICIENCY</div>
+                <div class="stat-description">Improved through better PRDs</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Section -->
+    <section class="marquee-section">
+        <div class="marquee">
+            <span class="marquee-item">Product Discovery</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">Market Research</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">Data Analytics</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">Funnel Optimization</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">Product Discovery</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">Market Research</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">Data Analytics</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">Funnel Optimization</span>
+            <span class="marquee-item">•</span>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+        <h2 class="section-title" data-observe>Experience</h2>
+
+        <div class="experience-item" data-observe>
+            <div class="experience-header">
+                <div class="experience-title-group">
+                    <h3>Associate Product Manager</h3>
+                    <div class="experience-company">Enigma Metaverse</div>
+                </div>
+                <div class="experience-meta">
+                    <div class="meta-detail">May 2025 – Present</div>
+                    <div class="meta-detail">Hyderabad</div>
+                    <div class="meta-detail">Team: 15</div>
+                </div>
+            </div>
+            <div class="experience-body">
+                <div class="experience-type">Software & IT<br>B2C & IT Services</div>
+                <div>
+                    <ul class="achievements">
+                        <li>Transitioned from Pega Data Scientist to Associate Product Manager, owning product initiatives end-to-end</li>
+                        <li>Built and deployed a predictive churn model using Pega Customer Decision Hub, enabling retention strategies</li>
+                        <li>Led market analysis and product discovery for Enigma Community, collaborating with Design, Ops, Legal, and Business teams</li>
+                        <li>Owned product execution for ERPNext SaaS initiatives, writing PRDs, user stories, and managing execution via Jira</li>
+                        <li>Improved development efficiency by 38% by clarifying requirements, prioritization, and reducing rework</li>
+                    </ul>
+                    <div class="tools-list">
+                        <span class="tool">Jira</span>
+                        <span class="tool">Notion</span>
+                        <span class="tool">Figma</span>
+                        <span class="tool">SQL</span>
+                        <span class="tool">Google Analytics</span>
+                        <span class="tool">Excel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item" data-observe>
+            <div class="experience-header">
+                <div class="experience-title-group">
+                    <h3>Business Development Executive</h3>
+                    <div class="experience-company">Aasaan App</div>
+                </div>
+                <div class="experience-meta">
+                    <div class="meta-detail">Apr 2024 – Apr 2025</div>
+                    <div class="meta-detail">Hyderabad</div>
+                    <div class="meta-detail">Team: 6</div>
+                </div>
+            </div>
+            <div class="experience-body">
+                <div class="experience-type">B2B E-commerce<br>SaaS</div>
+                <div>
+                    <ul class="achievements">
+                        <li>Worked closely with Product, Sales, Marketing, and Engineering to improve funnel performance and market fit</li>
+                        <li>Increased click-through rate by 24% and conversion rate by 16% through data-driven campaign and market analysis</li>
+                        <li>Designed and executed a machine learning lead-scoring model to classify leads, improving sales efficiency by 46%</li>
+                        <li>Conducted competitor analysis and SWOT across markets; provided feature-level inputs that reduced churn by 21.8%</li>
+                    </ul>
+                    <div class="tools-list">
+                        <span class="tool">HubSpot CRM</span>
+                        <span class="tool">Google Analytics</span>
+                        <span class="tool">Google Ads</span>
+                        <span class="tool">Google Trends</span>
+                        <span class="tool">Excel</span>
+                        <span class="tool">Python</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="experience-item" data-observe>
+            <div class="experience-header">
+                <div class="experience-title-group">
+                    <h3>Business Operations Executive</h3>
+                    <div class="experience-company">MyCaptain</div>
+                </div>
+                <div class="experience-meta">
+                    <div class="meta-detail">Dec 2023 – Mar 2024</div>
+                    <div class="meta-detail">Bangalore</div>
+                    <div class="meta-detail">Team: 8</div>
+                </div>
+            </div>
+            <div class="experience-body">
+                <div class="experience-type">EdTech<br>B2C</div>
+                <div>
+                    <ul class="achievements">
+                        <li>Led market research and lead generation strategy, identifying high-conversion markets for course offerings</li>
+                        <li>Increased team revenue from ₹2L to ₹10L (+₹8L) within 4 months by improving targeting and sales processes</li>
+                        <li>Improved sales conversion rate from 3% to 7% by aligning leads to stronger market-product fit</li>
+                        <li>Gathered and synthesized student feedback to improve course engagement and perceived career value</li>
+                    </ul>
+                    <div class="tools-list">
+                        <span class="tool">Excel</span>
+                        <span class="tool">Google Looker Studio</span>
+                        <span class="tool">Google Analytics</span>
+                        <span class="tool">Salesforce CRM</span>
+                        <span class="tool">Python</span>
+                        <span class="tool">Canva</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <h2 class="section-title" data-observe>Skills & Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category" data-observe>
+                <h3 class="skill-category-title">Product & Business</h3>
+                <ul class="skill-list">
+                    <li>Product Discovery</li>
+                    <li>Market Research</li>
+                    <li>PRDs & User Stories</li>
+                    <li>Roadmapping</li>
+                    <li>Feature Prioritization</li>
+                    <li>Funnel Optimization</li>
+                    <li>Acquisition & Retention</li>
+                    <li>Stakeholder Management</li>
+                </ul>
+            </div>
+            <div class="skill-category" data-observe>
+                <h3 class="skill-category-title">Analytics & Data</h3>
+                <ul class="skill-list">
+                    <li>Conversion Funnels</li>
+                    <li>Retention Analysis</li>
+                    <li>Churn Prediction</li>
+                    <li>Revenue Analysis</li>
+                    <li>Google Analytics</li>
+                    <li>Looker Studio</li>
+                    <li>SQL & Excel</li>
+                    <li>Python for Data</li>
+                </ul>
+            </div>
+            <div class="skill-category" data-observe>
+                <h3 class="skill-category-title">Tools & Platforms</h3>
+                <ul class="skill-list">
+                    <li>Jira & Notion</li>
+                    <li>Figma & Design Tools</li>
+                    <li>HubSpot & Salesforce</li>
+                    <li>Pega Customer Decision Hub</li>
+                    <li>Google Ads & Trends</li>
+                </ul>
+                <h3 class="skill-category-title" style="margin-top: 3rem;">Certifications</h3>
+                <ul class="skill-list">
+                    <li>Certified Pega Data Scientist</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education-section">
+        <h2 class="section-title" data-observe>Education</h2>
+        <div class="education-grid">
+            <div class="education-item" data-observe>
+                <div class="education-number">01</div>
+                <div class="education-content">
+                    <h3>BTech, Electronics & Communications Engineering</h3>
+                    <div class="education-school">SRM Institute of Science & Technology</div>
+                    <div class="education-details">Chennai • 2020-2024 • CGPA: 8.5</div>
+                    <div class="education-coursework">
+                        <strong>Coursework:</strong> Applied Machine Learning, Probability, Management Principles, Data Analysis (Open-Source Tools)
+                    </div>
+                </div>
+            </div>
+            <div class="education-item" data-observe>
+                <div class="education-number">02</div>
+                <div class="education-content">
+                    <h3>TSBIE, Mathematics, Physics, Chemistry</h3>
+                    <div class="education-school">Sri Chaitanya Junior College</div>
+                    <div class="education-details">Hyderabad • 2018-2020 • 84.5%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <h2 class="contact-title" data-observe>Let's Create<br>Something Great</h2>
+        <p class="contact-subtitle" data-observe>
+            I'm always excited to discuss product opportunities, collaborate on innovative projects, 
+            or share insights about data-driven product strategies.
+        </p>
+        <div class="contact-links">
+            <a href="mailto:yashwanth2002yatham@gmail.com" class="contact-link" data-observe>
+                <span>✉</span>
+                <span>Email Me</span>
+            </a>
+            <a href="https://www.linkedin.com/in/yashwanth-reddy-yatham-11ba92286/" target="_blank" class="contact-link" data-observe>
+                <span>💼</span>
+                <span>LinkedIn</span>
+            </a>
+            <a href="tel:+916300558956" class="contact-link" data-observe>
+                <span>📱</span>
+                <span>+91 6300558956</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-text">© 2025 Yashwanth Reddy Yatham</div>
+        <div class="footer-text">Designed with intention & precision</div>
+        <div class="footer-social">
+            <a href="https://www.linkedin.com/in/yashwanth-reddy-yatham-11ba92286/" target="_blank">LinkedIn</a>
+            <a href="mailto:yashwanth2002yatham@gmail.com">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        // Page Loader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        let followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.5;
+            cursorY += (mouseY - cursorY) * 0.5;
+            followerX += (mouseX - followerX) * 0.1;
+            followerY += (mouseY - followerY) * 0.1;
+
+            cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+            cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor Expand on Hover
+        const interactiveElements = document.querySelectorAll('a, button, .tool, .skill-list li');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('expand'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('expand'));
+        });
+
+        // Parallax Effect
+        const parallaxElements = document.querySelectorAll('[data-parallax]');
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            parallaxElements.forEach(el => {
+                const speed = 0.5;
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    
+                    // Counter Animation
+                    if (entry.target.querySelector('[data-count]')) {
+                        const countEl = entry.target.querySelector('[data-count]');
+                        const target = parseFloat(countEl.getAttribute('data-count'));
+                        animateCount(countEl, target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-observe]').forEach(el => observer.observe(el));
+
+        // Counter Animation
+        function animateCount(element, target) {
+            let current = 0;
+            const increment = target / 60;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target % 1 === 0 ? target : target.toFixed(1);
+                    clearInterval(timer);
+                } else {
+                    element.textContent = current % 1 === 0 ? Math.floor(current) : current.toFixed(1);
+                }
+            }, 30);
+        }
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
