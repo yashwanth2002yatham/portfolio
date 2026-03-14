@@ -234,17 +234,20 @@ h2 {
   padding: 10px 14px; background: var(--surface); border-radius: 8px;
 }
 .exp-tools strong { color: var(--ink2); font-weight: 500; }
-.bullet-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.bullet-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .bullet-list li {
-  display: flex; gap: 12px; align-items: flex-start;
-  font-size: 15px; color: #334155; line-height: 1.65;
+  display: flex; gap: 14px; align-items: flex-start;
+  font-size: 15.5px; color: #1e293b; line-height: 1.75;
+  font-weight: 400;
 }
 .bullet-list li::before {
-  content: ''; flex-shrink: 0; width: 6px; height: 6px;
+  content: ''; flex-shrink: 0; width: 7px; height: 7px;
   border-radius: 50%; background: var(--accent);
-  margin-top: 9px;
+  margin-top: 10px;
 }
-.bullet-list li strong { color: var(--ink); font-weight: 500; }
+.bullet-list li strong {
+  font-weight: 600;
+}
 
 /* ── SKILLS ── */
 #skills { background: var(--surface); }
@@ -333,10 +336,69 @@ h2 {
 
 /* ── FOOTER ── */
 footer {
-  background: #060a14; padding: 28px 5vw;
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  background: #060a14;
+  padding: 64px 5vw 36px;
 }
-footer span { font-size: 13px; color: rgba(255,255,255,0.25); }
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+}
+.footer-top {
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 48px; padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 32px;
+}
+.footer-brand-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: #fff; letter-spacing: -0.02em; margin-bottom: 10px;
+}
+.footer-brand-name span { color: var(--accent); }
+.footer-tagline { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.6; margin-bottom: 20px; max-width: 240px; }
+.footer-email-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,87,255,0.15); border: 1px solid rgba(0,87,255,0.3);
+  color: #93b4ff; border-radius: 8px;
+  padding: 9px 14px; font-size: 13px; font-weight: 500;
+  text-decoration: none; transition: background 0.2s;
+  word-break: break-all;
+}
+.footer-email-pill:hover { background: rgba(0,87,255,0.25); }
+.footer-col-title {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 18px;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a {
+  font-size: 14px; color: rgba(255,255,255,0.55);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: #fff; }
+.footer-contact-items { display: flex; flex-direction: column; gap: 12px; }
+.footer-contact-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: rgba(255,255,255,0.55);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-contact-item:hover { color: #fff; }
+.footer-contact-item svg { flex-shrink: 0; opacity: 0.5; }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom span { font-size: 12px; color: rgba(255,255,255,0.2); }
+.footer-status {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--accent2);
+}
+.footer-status::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent2); animation: pulse 2s infinite;
+}
+@media (max-width: 768px) {
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+}
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
@@ -489,7 +551,7 @@ footer span { font-size: 13px; color: rgba(255,255,255,0.25); }
         <div class="exp-body">
           <div class="exp-tools"><strong>Tools:</strong> Jira · Notion · Figma · SQL · Google Analytics · Pega CDH · Excel · REST APIs</div>
           <ul class="bullet-list">
-            <li>Owned end-to-end product execution for ERPNext SaaS — PRDs, user stories, and Jira sprint management — <strong>improving dev efficiency by 38%</strong> by reducing rework and clarifying requirements.</li>
+            <li>Owned end-to-end product execution for ERPNext SaaS — PRDs, user stories, and Jira sprint management — improving dev efficiency by 38% by reducing rework and clarifying requirements.</li>
             <li>Built and deployed a predictive churn model via Pega CDH, identifying at-risk cohorts and enabling proactive retention strategies before revenue impact.</li>
             <li>Led product discovery for Enigma Community: ran stakeholder interviews, defined user personas, and shipped compliant, user-validated features with Design, Ops, Legal, and Business.</li>
             <li>Introduced structured requirement clarification that eliminated ambiguity-driven sprint blockers and reduced planning overhead across engineering cycles.</li>
@@ -518,9 +580,9 @@ footer span { font-size: 13px; color: rgba(255,255,255,0.25); }
         <div class="exp-body">
           <div class="exp-tools"><strong>Tools:</strong> HubSpot CRM · Google Analytics · Google Ads · Excel · Python · Google Trends</div>
           <ul class="bullet-list">
-            <li>Partnered with Product &amp; Engineering to translate market insights into feature-level inputs — directly contributing to a <strong>21.8% churn reduction</strong> across core customer segments.</li>
-            <li>Designed an ML lead-scoring model in Python, classifying inbound leads by conversion probability and <strong>boosting sales efficiency by 46%</strong>.</li>
-            <li>Drove <strong>16% conversion rate improvement</strong> and <strong>24% CTR lift</strong> through data-driven funnel analysis and SWOT-informed campaign strategy.</li>
+            <li>Partnered with Product and Engineering to translate market insights into feature-level inputs, directly contributing to a 21.8% churn reduction across core customer segments.</li>
+            <li>Designed an ML lead-scoring model in Python, classifying inbound leads by conversion probability and boosting sales efficiency by 46%.</li>
+            <li>Drove a 16% conversion rate improvement and 24% CTR lift through data-driven funnel analysis and SWOT-informed campaign strategy aligned to buyer pain points.</li>
             <li>Bridged sales insights and product roadmap by surfacing acquisition, activation, and retention funnel data to support prioritisation decisions.</li>
           </ul>
         </div>
@@ -548,8 +610,8 @@ footer span { font-size: 13px; color: rgba(255,255,255,0.25); }
         <div class="exp-body">
           <div class="exp-tools"><strong>Tools:</strong> Salesforce CRM · Excel · Google Looker Studio · Google Analytics · Python · Canva</div>
           <ul class="bullet-list">
-            <li>Scaled team revenue <strong>₹2L → ₹10L (+400%)</strong> in 4 months by identifying high-conversion markets and redesigning targeting and sales processes.</li>
-            <li>Improved sales conversion <strong>3% → 7% (2.3× lift)</strong> by aligning lead quality to market–product fit across course verticals.</li>
+            <li>Scaled team revenue from ₹2L to ₹10L, a 400% increase in 4 months, by identifying high-conversion markets and redesigning targeting and sales processes.</li>
+            <li>Improved sales conversion from 3% to 7% (a 2.3x lift) by aligning lead quality to market-product fit across course verticals.</li>
             <li>Synthesised student feedback into course improvement inputs, raising engagement metrics and perceived career value of course offerings.</li>
           </ul>
         </div>
@@ -669,7 +731,7 @@ footer span { font-size: 13px; color: rgba(255,255,255,0.25); }
   <div class="contact-inner reveal">
     <span class="section-tag" style="color:rgba(255,255,255,0.4)">Let's connect</span>
     <h2>Looking for a PM who ships?</h2>
-    <p>I'm actively exploring APM, PM, BA, and Growth roles in Hyderabad at 12+ LPA. Let's talk.</p>
+    <p>I'm actively exploring APM, PM, BA, and Growth roles in Hyderabad. Let's talk.</p>
     <div class="contact-links">
       <a href="mailto:yashwanth2002yatham@gmail.com" class="contact-link email">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -688,8 +750,54 @@ footer span { font-size: 13px; color: rgba(255,255,255,0.25); }
 </section>
 
 <footer>
-  <span>© 2026 Yashwanth Reddy Yatham</span>
-  <span>Built for impact. Open to opportunities.</span>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Yashwanth<span>.</span></div>
+        <div class="footer-tagline">Associate Product Manager · Open to APM, PM, BA &amp; Growth roles in Hyderabad at 12+ LPA.</div>
+        <a href="mailto:yashwanth2002yatham@gmail.com" class="footer-email-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          yashwanth2002yatham@gmail.com
+        </a>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get in touch</div>
+        <div class="footer-contact-items">
+          <a href="mailto:yashwanth2002yatham@gmail.com" class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            yashwanth2002yatham@gmail.com
+          </a>
+          <a href="tel:+916300558956" class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.54a16 16 0 0 0 6.29 6.29l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 6300558956
+          </a>
+          <a href="https://linkedin.com/in/yashwanth-reddy-yatham" target="_blank" class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn Profile
+          </a>
+          <span class="footer-contact-item" style="cursor:default">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Hyderabad, India
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Yashwanth Reddy Yatham. All rights reserved.</span>
+      <span class="footer-status">Available for opportunities</span>
+    </div>
+  </div>
 </footer>
 
 <script>
