@@ -263,11 +263,55 @@ h2 {
   font-weight: 600;
 }
 
+/* ── FEATURED WORK ── */
+#featured { background: var(--surface); }
+.featured-list { display: flex; flex-direction: column; gap: 2px; }
+.featured-item {
+  border: 1px solid var(--line); border-radius: var(--r);
+  overflow: hidden; background: var(--card);
+  transition: box-shadow 0.25s;
+}
+.featured-item:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+.featured-header {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 16px; align-items: start;
+  padding: 28px 32px; cursor: pointer;
+  user-select: none;
+}
+.featured-title { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.featured-category { font-size: 15px; color: var(--accent); font-weight: 500; margin-bottom: 8px; }
+.featured-meta { display: flex; gap: 12px; flex-wrap: wrap; }
+.featured-tag {
+  font-size: 12px; padding: 3px 10px; border-radius: 100px;
+  background: var(--surface); color: var(--muted);
+  border: 1px solid var(--line); font-weight: 500;
+}
+.featured-desc { font-size: 15px; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+.featured-chevron {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--surface); display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s, background 0.2s; flex-shrink: 0; margin-top: 4px;
+}
+.featured-chevron svg { width: 14px; height: 14px; stroke: var(--muted); }
+.featured-item.open .featured-chevron { transform: rotate(180deg); background: rgba(0,87,255,0.1); }
+.featured-item.open .featured-chevron svg { stroke: var(--accent); }
+.featured-body { display: none; padding: 0 32px 28px; }
+.featured-item.open .featured-body { display: block; }
+.featured-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,87,255,0.08); border: 1px solid rgba(0,87,255,0.2);
+  color: var(--accent); padding: 10px 16px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  margin-top: 16px;
+}
+.featured-link:hover { background: rgba(0,87,255,0.15); border-color: rgba(0,87,255,0.3); }
+
 /* ── SKILLS ── */
-#skills { background: var(--surface); }
+#skills { background: var(--card); }
 .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 .skill-card {
-  background: var(--card); border: 1px solid var(--line);
+  background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--r); padding: 24px 26px;
   transition: transform 0.25s, box-shadow 0.25s;
 }
@@ -286,7 +330,7 @@ h2 {
 }
 
 /* ── ABOUT ── */
-#about { background: var(--card); }
+#about { background: var(--surface); }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .about-text p { font-size: 16px; color: #475569; line-height: 1.8; margin-bottom: 16px; }
 .about-text p:last-child { margin-bottom: 0; }
@@ -294,7 +338,7 @@ h2 {
 .highlight-item {
   display: flex; gap: 16px; align-items: flex-start;
   padding: 20px; border-radius: 12px; border: 1px solid var(--line);
-  background: var(--surface); transition: border-color 0.2s;
+  background: var(--card); transition: border-color 0.2s;
 }
 .highlight-item:hover { border-color: rgba(0,87,255,0.2); }
 .highlight-icon {
@@ -306,10 +350,10 @@ h2 {
 .highlight-sub { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
 /* ── EDUCATION & CERT ── */
-#education { background: var(--surface); }
+#education { background: var(--card); }
 .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .edu-card {
-  background: var(--card); border: 1px solid var(--line);
+  background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--r); padding: 28px;
   transition: box-shadow 0.25s;
 }
@@ -437,11 +481,15 @@ footer {
   .exp-date { order: -1; }
   .exp-chevron { display: none; }
   .exp-body { display: block; }
+  .featured-header { grid-template-columns: 1fr; }
+  .featured-chevron { display: none; }
+  .featured-body { display: block; }
 }
 @media (max-width: 480px) {
   section { padding: 72px 5vw; }
   .metric-num { font-size: 36px; }
   .exp-header, .exp-body { padding-left: 20px; padding-right: 20px; }
+  .featured-header, .featured-body { padding-left: 20px; padding-right: 20px; }
 }
 </style>
 </head>
@@ -452,6 +500,7 @@ footer {
   <a href="#hero" class="nav-logo">YR<span>.</span></a>
   <ul class="nav-links">
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#featured">Featured Work</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#education">Education</a></li>
@@ -463,6 +512,7 @@ footer {
 </nav>
 <div class="mobile-menu" id="mobile-menu">
   <a href="#experience" onclick="closeMobile()">Experience</a>
+  <a href="#featured" onclick="closeMobile()">Featured Work</a>
   <a href="#skills" onclick="closeMobile()">Skills</a>
   <a href="#about" onclick="closeMobile()">About</a>
   <a href="#education" onclick="closeMobile()">Education</a>
@@ -474,7 +524,7 @@ footer {
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-inner">
-    <div class="hero-badge">Available for product roles in Hyderabad</div>
+    <div class="hero-badge">Available for product roles across India</div>
     <h1>Product Manager<br>who ships with <em>data</em><br>not just instinct.</h1>
     <p class="hero-sub">Yashwanth Reddy Yatham — APM with 2+ years across B2B SaaS, EdTech, and E-commerce. I turn messy problems into clean roadmaps and clean roadmaps into measurable outcomes.</p>
     <div class="hero-actions">
@@ -489,7 +539,7 @@ footer {
     </div>
     <div class="hero-stats">
       <div>
-        <div class="hstat-val"><span>2</span>+ yrs</div>
+        <div class="hstat-val"><span>2.6</span> yrs</div>
         <div class="hstat-label">Total experience</div>
       </div>
       <div>
@@ -497,8 +547,8 @@ footer {
         <div class="hstat-label">Industries shipped in</div>
       </div>
       <div>
-        <div class="hstat-val"><span>46</span>%</div>
-        <div class="hstat-label">Peak efficiency gain</div>
+        <div class="hstat-val"><span>26</span>%</div>
+        <div class="hstat-label">Churn reduction (behavioral)</div>
       </div>
       <div>
         <div class="hstat-val"><span>5</span>×</div>
@@ -513,23 +563,23 @@ footer {
   <div class="metrics-grid">
     <div class="metric-card reveal">
       <div class="metric-num">+38<sup>%</sup></div>
-      <div class="metric-label">Development efficiency</div>
-      <div class="metric-source">Enigma Metaverse · SaaS</div>
+      <div class="metric-label">Sprint rework reduction</div>
+      <div class="metric-source">Enigma Metaverse · B2B SaaS ERP</div>
     </div>
     <div class="metric-card reveal">
-      <div class="metric-num">21.8<sup>%</sup></div>
-      <div class="metric-label">Churn reduction</div>
-      <div class="metric-source">Aasaan App · E-commerce SaaS</div>
+      <div class="metric-num">26<sup>%</sup></div>
+      <div class="metric-label">Churn reduction (A/B tested)</div>
+      <div class="metric-source">Behavioral segmentation · 250K customers</div>
     </div>
     <div class="metric-card reveal">
       <div class="metric-num">+46<sup>%</sup></div>
       <div class="metric-label">Sales efficiency improvement</div>
-      <div class="metric-source">ML lead-scoring model</div>
+      <div class="metric-source">ML lead-scoring + revenue lift</div>
     </div>
     <div class="metric-card reveal">
-      <div class="metric-num">+400<sup>%</sup></div>
-      <div class="metric-label">Revenue growth in 4 months</div>
-      <div class="metric-source">MyCaptain · EdTech</div>
+      <div class="metric-num">5<sup>×</sup></div>
+      <div class="metric-label">Revenue growth (3 months)</div>
+      <div class="metric-source">MyCaptain · EdTech · ₹2L → ₹10L</div>
     </div>
   </div>
 </div>
@@ -549,7 +599,7 @@ footer {
             <div class="exp-role">Associate Product Manager</div>
             <div class="exp-company">Enigma Metaverse</div>
             <div class="exp-meta">
-              <span class="exp-tag">B2C SaaS</span>
+              <span class="exp-tag">B2B SaaS ERP</span>
               <span class="exp-tag">Software &amp; IT</span>
               <span class="exp-tag">Team: 15</span>
               <span class="exp-tag">Current role</span>
@@ -565,10 +615,10 @@ footer {
         <div class="exp-body">
           <div class="exp-tools"><strong>Tools:</strong> Jira · Notion · Figma · SQL · Google Analytics · Pega CDH · Excel · REST APIs</div>
           <ul class="bullet-list">
-            <li>Owned end-to-end product execution for ERPNext SaaS — PRDs, user stories, and Jira sprint management — improving dev efficiency by 38% by reducing rework and clarifying requirements.</li>
-            <li>Built and deployed a predictive churn model via Pega CDH, identifying at-risk cohorts and enabling proactive retention strategies before revenue impact.</li>
-            <li>Led product discovery for Enigma Community: ran stakeholder interviews, defined user personas, and shipped compliant, user-validated features with Design, Ops, Legal, and Business.</li>
-            <li>Introduced structured requirement clarification that eliminated ambiguity-driven sprint blockers and reduced planning overhead across engineering cycles.</li>
+            <li>Designed <strong>behavioral segmentation logic in Pega CDH</strong> across a 250K-customer dataset, surfacing <strong>13,900+ at-risk accounts</strong> with measurable churn signals and enabling prioritized retention targeting for the first time.</li>
+            <li>Designed and executed a <strong>retention intervention campaign with formal A/B structure</strong> (50% treatment, 50% control holdout group); automated workflows reduced <strong>churn 26% vs. the prior two-quarter baseline</strong>, with control group confirming causality.</li>
+            <li>Diagnosed sprint disruptions (38% of cycles were rework-heavy); introduced structured PRD review gates before engineering handoff, <strong>reducing sprint rework and mid-sprint re-estimation by 38%</strong> across 6 release cycles.</li>
+            <li>Authored PRDs, user stories, acceptance criteria across CRM, ERP, HRMS, and B2B commerce product lines; facilitated discovery workshops with Design, Operations, and Business teams to prioritize competing inputs into ranked roadmaps.</li>
           </ul>
         </div>
       </div>
@@ -592,12 +642,11 @@ footer {
           </div>
         </div>
         <div class="exp-body">
-          <div class="exp-tools"><strong>Tools:</strong> HubSpot CRM · Google Analytics · Google Ads · Excel · Python · Google Trends</div>
+          <div class="exp-tools"><strong>Tools:</strong> HubSpot CRM · Google Analytics · Looker Studio · Excel · Python · Amplitude</div>
           <ul class="bullet-list">
-            <li>Partnered with Product and Engineering to translate market insights into feature-level inputs, directly contributing to a 21.8% churn reduction across core customer segments.</li>
-            <li>Designed an ML lead-scoring model in Python, classifying inbound leads by conversion probability and boosting sales efficiency by 46%.</li>
-            <li>Drove a 16% conversion rate improvement and 24% CTR lift through data-driven funnel analysis and SWOT-informed campaign strategy aligned to buyer pain points.</li>
-            <li>Bridged sales insights and product roadmap by surfacing acquisition, activation, and retention funnel data to support prioritisation decisions.</li>
+            <li>Built <strong>ML lead-scoring segmentation logic trained on 200K+ historical records</strong>; partnered with engineering to implement automated lead routing and A/B tested against baseline, <strong>reducing sales screening time 46% and driving 46% team revenue lift</strong> within 3 months.</li>
+            <li>Identified <strong>two high-drop-off onboarding screens</strong> (welcome and product configuration) using Amplitude funnel analysis; partnered with Product and Design to surface UX issues. Deployed fixes <strong>reduced churn 21.8%, improved conversion 16%, and lifted feature-adoption CTR 24%</strong> over 3 months.</li>
+            <li>Tracked acquisition and activation metrics across Amplitude, Google Analytics, and Looker Studio; synthesized funnel data with acquisition insights to guide product prioritization.</li>
           </ul>
         </div>
       </div>
@@ -624,10 +673,106 @@ footer {
         <div class="exp-body">
           <div class="exp-tools"><strong>Tools:</strong> Salesforce CRM · Excel · Google Looker Studio · Google Analytics · Python · Canva</div>
           <ul class="bullet-list">
-            <li>Scaled team revenue from ₹2L to ₹10L, a 400% increase in 4 months, by identifying high-conversion markets and redesigning targeting and sales processes.</li>
-            <li>Improved sales conversion from 3% to 7% (a 2.3x lift) by aligning lead quality to market-product fit across course verticals.</li>
-            <li>Synthesised student feedback into course improvement inputs, raising engagement metrics and perceived career value of course offerings.</li>
+            <li>Scaled monthly team revenue from <strong>₹2L to ₹10L (5× growth) in 3 months</strong> by building student-fit segmentation models and redesigning targeting and sales workflows to align with market-product fit.</li>
+            <li>Improved sales conversion from <strong>3% to 7% (2.3× lift)</strong> by defining customer-fit signals and prioritizing high-intent prospects across course verticals.</li>
+            <li>Synthesized student feedback on curriculum and learning experience with product team; surfaced patterns that raised satisfaction from 3.9 to 4.2 and course completion from 12.3% to 14.7%.</li>
           </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED WORK -->
+<section id="featured">
+  <div class="section-inner">
+    <span class="section-tag">Featured Work</span>
+    <h2>Proof of thinking</h2>
+    <p class="section-lead">Articles, teardowns, and case studies that show how I approach product strategy and analytics.</p>
+    <div class="featured-list">
+
+      <!-- Teradata Teardown -->
+      <div class="featured-item reveal">
+        <div class="featured-header" onclick="toggleFeatured(this)">
+          <div>
+            <div class="featured-title">Teradata Product Teardown</div>
+            <div class="featured-category">Product Strategy</div>
+            <div class="featured-desc">Deep dive into Teradata's go-to-market positioning, pricing psychology, and product differentiation strategy — lessons for B2B SaaS PMs building in the analytics space.</div>
+            <div class="featured-meta">
+              <span class="featured-tag">Product Strategy</span>
+              <span class="featured-tag">SaaS</span>
+              <span class="featured-tag">Analytics</span>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div class="featured-chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="featured-body">
+          <p style="font-size: 15px; color: #1e293b; line-height: 1.75; margin-bottom: 16px;">A comprehensive analysis of how Teradata owns the enterprise analytics market: examining their pricing tiers, feature layering, competitive positioning against Snowflake and BigQuery, and how they balance enterprise stickiness with product innovation. Includes strategic takeaways for early-stage analytics PMs.</p>
+          <a href="#" class="featured-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 5v4h-4M3 19v-4h4M20.49 9a9 9 0 1 1-18.98 2"/></svg>
+            View Article (Placeholder)
+          </a>
+        </div>
+      </div>
+
+      <!-- Retention Analytics Framework -->
+      <div class="featured-item reveal">
+        <div class="featured-header" onclick="toggleFeatured(this)">
+          <div>
+            <div class="featured-title">Retention Analytics Framework</div>
+            <div class="featured-category">Analytics & Product</div>
+            <div class="featured-desc">A playbook for designing and measuring retention campaigns with rigor: behavioral segmentation, control group design, metric selection, and how to move from descriptive to predictive retention models.</div>
+            <div class="featured-meta">
+              <span class="featured-tag">Analytics</span>
+              <span class="featured-tag">Experimentation</span>
+              <span class="featured-tag">Retention</span>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div class="featured-chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="featured-body">
+          <p style="font-size: 15px; color: #1e293b; line-height: 1.75; margin-bottom: 16px;">An operational guide to running retention campaigns that move metrics. Covers: identifying at-risk cohorts, designing A/B tests with holdout groups, defining leading vs. lagging indicators, and building feedback loops between analytics and product. Grounded in real examples from my work at Enigma and Aasaan.</p>
+          <a href="#" class="featured-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 5v4h-4M3 19v-4h4M20.49 9a9 9 0 1 1-18.98 2"/></svg>
+            View Article (Placeholder)
+          </a>
+        </div>
+      </div>
+
+      <!-- FlowState Case Study -->
+      <div class="featured-item reveal">
+        <div class="featured-header" onclick="toggleFeatured(this)">
+          <div>
+            <div class="featured-title">FlowState: 0→1 Productivity App</div>
+            <div class="featured-category">Product Case Study</div>
+            <div class="featured-desc">End-to-end case study of a native Android app I built from scratch using user research, PRD authoring, LLM-assisted prototyping, and iterative validation. Demonstrates discovery, design thinking, and AI-powered product exploration.</div>
+            <div class="featured-meta">
+              <span class="featured-tag">Product Design</span>
+              <span class="featured-tag">User Research</span>
+              <span class="featured-tag">AI Product</span>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div class="featured-chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="featured-body">
+          <p style="font-size: 15px; color: #1e293b; line-height: 1.75; margin-bottom: 16px;">A deep dive into how I approach 0→1 product building: 15+ user interviews to identify pain points, structured PRDs and user flows across 12 product modules, and using LLMs and workflow automation to validate behavioral hypotheses. Shows my product discovery and execution philosophy in action.</p>
+          <a href="#" class="featured-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 5v4h-4M3 19v-4h4M20.49 9a9 9 0 1 1-18.98 2"/></svg>
+            View Case Study (Placeholder)
+          </a>
         </div>
       </div>
 
@@ -643,31 +788,31 @@ footer {
     <p class="section-lead">A cross-functional toolkit built across real products — not just coursework.</p>
     <div class="skills-grid">
       <div class="skill-card reveal">
-        <div class="skill-icon" style="background:rgba(0,87,255,0.1)">🗺️</div>
-        <div class="skill-title">Product Management</div>
+        <div class="skill-icon" style="background:rgba(0,87,255,0.1)">📊</div>
+        <div class="skill-title">Analytics & Experimentation</div>
         <div class="skill-tags">
-          <span class="stag">Product Discovery</span><span class="stag">PRD Writing</span><span class="stag">User Stories</span><span class="stag">Roadmapping</span><span class="stag">Feature Prioritisation</span><span class="stag">Agile/Scrum</span><span class="stag">Sprint Planning</span><span class="stag">Go-to-Market</span>
+          <span class="stag">A/B Testing</span><span class="stag">Behavioral Analytics</span><span class="stag">Retention Strategy</span><span class="stag">Churn Analysis</span><span class="stag">Funnel Optimisation</span><span class="stag">Segmentation</span><span class="stag">KPI Definition</span>
         </div>
       </div>
       <div class="skill-card reveal">
-        <div class="skill-icon" style="background:rgba(0,212,170,0.1)">📊</div>
-        <div class="skill-title">Growth &amp; Analytics</div>
+        <div class="skill-icon" style="background:rgba(0,212,170,0.1)">🗺️</div>
+        <div class="skill-title">Product Management</div>
         <div class="skill-tags">
-          <span class="stag">Funnel Optimisation</span><span class="stag">Churn Analysis</span><span class="stag">A/B Testing</span><span class="stag">KPI Definition</span><span class="stag">Revenue Analysis</span><span class="stag">Retention</span><span class="stag">Activation</span>
+          <span class="stag">Product Discovery</span><span class="stag">PRD Writing</span><span class="stag">User Stories</span><span class="stag">Roadmapping</span><span class="stag">Feature Prioritisation</span><span class="stag">Agile/Scrum</span><span class="stag">Sprint Planning</span>
         </div>
       </div>
       <div class="skill-card reveal">
         <div class="skill-icon" style="background:rgba(255,107,53,0.1)">🤝</div>
-        <div class="skill-title">Stakeholder &amp; Collaboration</div>
+        <div class="skill-title">Cross-functional Leadership</div>
         <div class="skill-tags">
-          <span class="stag">Cross-functional Teams</span><span class="stag">Engineering</span><span class="stag">Design</span><span class="stag">Sales</span><span class="stag">Leadership</span><span class="stag">Requirement Gathering</span>
+          <span class="stag">Engineering</span><span class="stag">Design</span><span class="stag">Sales</span><span class="stag">Stakeholder Management</span><span class="stag">Requirement Gathering</span><span class="stag">Team Collaboration</span>
         </div>
       </div>
       <div class="skill-card reveal">
         <div class="skill-icon" style="background:rgba(139,92,246,0.1)">🛠️</div>
-        <div class="skill-title">Tools &amp; Tech</div>
+        <div class="skill-title">Tools & Tech</div>
         <div class="skill-tags">
-          <span class="stag">Jira</span><span class="stag">Notion</span><span class="stag">Figma</span><span class="stag">SQL</span><span class="stag">Google Analytics</span><span class="stag">HubSpot</span><span class="stag">Salesforce</span><span class="stag">Looker Studio</span><span class="stag">Python</span><span class="stag">Pega CDH</span>
+          <span class="stag">Amplitude</span><span class="stag">Looker Studio</span><span class="stag">Jira</span><span class="stag">Notion</span><span class="stag">Figma</span><span class="stag">SQL</span><span class="stag">Python</span><span class="stag">Pega CDH</span>
         </div>
       </div>
     </div>
@@ -680,31 +825,31 @@ footer {
     <div class="about-grid">
       <div class="about-text reveal">
         <span class="section-tag">About me</span>
-        <h2>I think in systems, not just features.</h2>
-        <p>I started as a Pega Data Scientist and transitioned into product management — which means I understand both the technical depth and the business surface. I've shipped products in SaaS, EdTech, and E-commerce, working in teams as small as 6 and as cross-functional as 15.</p>
-        <p>What drives me is the gap between what users struggle with and what a product actually offers. I close that gap through structured discovery, tight PRDs, and relentless follow-through in sprint cycles.</p>
-        <p>Based in Hyderabad. Targeting APM, PM, BA, and Growth roles. Open to opportunities.</p>
+        <h2>I ship with <em>data</em>,<br>not instinct.</h2>
+        <p>I'm an APM obsessed with closing the gap between what users struggle with and what a product actually offers. Started as a Pega Data Scientist, transitioned into product management — which means I think in systems, not just features.</p>
+        <p>Over 2.6 years across B2B SaaS, EdTech, and e-commerce, I've designed retention campaigns that moved 26% churn reduction, built ML models that cut sales screening by 46%, and scaled revenue 5× by fixing onboarding drop-offs. Every roadmap I own comes with a hypothesis. I don't guess — I instrument, observe, and iterate.</p>
+        <p>I own end-to-end cycles: discovery, PRD authoring, sprint execution, metrics validation. Based in India. Targeting APM, Analytics PM, and Growth roles at Series A–B startups building data-driven products. Let's talk if you're hiring for rigor, not guesswork.</p>
       </div>
       <div class="about-highlights reveal">
         <div class="highlight-item">
           <div class="highlight-icon" style="background:rgba(0,87,255,0.1)">🎯</div>
           <div>
             <div class="highlight-title">Data-first decisions</div>
-            <div class="highlight-sub">Every roadmap item I've owned came with a metric hypothesis. I don't guess — I instrument, observe, and iterate.</div>
+            <div class="highlight-sub">Every roadmap item comes with a metric hypothesis. Behavioral segmentation, A/B testing with control groups, predictive churn models — I don't guess.</div>
           </div>
         </div>
         <div class="highlight-item">
           <div class="highlight-icon" style="background:rgba(0,212,170,0.1)">⚙️</div>
           <div>
             <div class="highlight-title">Technical fluency</div>
-            <div class="highlight-sub">Built ML models in Python, worked with REST APIs, and can read SQL. I translate between engineers and stakeholders without friction.</div>
+            <div class="highlight-sub">Built ML models in Python, designed decision logic in Pega CDH, worked with REST APIs and SQL. I translate between engineers and stakeholders without friction.</div>
           </div>
         </div>
         <div class="highlight-item">
           <div class="highlight-icon" style="background:rgba(255,107,53,0.1)">🚀</div>
           <div>
-            <div class="highlight-title">Bias for execution</div>
-            <div class="highlight-sub">I've owned end-to-end cycles — from the first interview to the shipped feature. Discovery without delivery is just research.</div>
+            <div class="highlight-title">Cross-functional shipping</div>
+            <div class="highlight-sub">I've owned end-to-end cycles — from discovery interviews to shipped features to metrics validation. Bias for execution, not endless research.</div>
           </div>
         </div>
       </div>
@@ -733,7 +878,7 @@ footer {
         <div class="edu-badge green">Certification</div>
         <div class="edu-degree">Certified Pega Data Scientist</div>
         <div class="edu-inst">Pega Systems</div>
-        <div class="edu-detail" style="margin-top:12px;line-height:1.6">Hands-on certification in decision management, predictive analytics, and customer decision hub implementations — applied directly in my role at Enigma Metaverse.</div>
+        <div class="edu-detail" style="margin-top:12px;line-height:1.6">Hands-on certification in decision management, predictive analytics, and customer decision hub implementations — applied directly in my retention and behavioral segmentation work at Enigma Metaverse.</div>
       </div>
     </div>
   </div>
@@ -745,7 +890,7 @@ footer {
   <div class="contact-inner reveal">
     <span class="section-tag" style="color:rgba(255,255,255,0.4)">Let's connect</span>
     <h2>Looking for a PM who ships?</h2>
-    <p>I'm actively exploring APM, PM, BA, and Growth roles in Hyderabad. Let's talk.</p>
+    <p>I'm actively exploring APM and Analytics PM roles at Series A–B startups building data-driven products across India. If you're hiring for rigor, not guesswork, let's talk.</p>
     <div class="contact-links">
       <a href="mailto:yashwanth2002yatham@gmail.com" class="contact-link email">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -768,7 +913,7 @@ footer {
     <div class="footer-top">
       <div>
         <div class="footer-brand-name">Yashwanth<span>.</span></div>
-        <div class="footer-tagline">Associate Product Manager · Open to APM, PM, BA &amp; Growth roles in Hyderabad.</div>
+        <div class="footer-tagline">Associate Product Manager · Open to APM, Analytics PM &amp; Growth roles across India.</div>
         <a href="mailto:yashwanth2002yatham@gmail.com" class="footer-email-pill">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           yashwanth2002yatham@gmail.com
@@ -779,6 +924,7 @@ footer {
         <ul class="footer-links">
           <li><a href="#hero">Home</a></li>
           <li><a href="#experience">Experience</a></li>
+          <li><a href="#featured">Featured Work</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#education">Education</a></li>
@@ -817,6 +963,11 @@ footer {
 <script>
 function toggleExp(header) {
   const item = header.closest('.exp-item');
+  item.classList.toggle('open');
+}
+
+function toggleFeatured(header) {
+  const item = header.closest('.featured-item');
   item.classList.toggle('open');
 }
 
